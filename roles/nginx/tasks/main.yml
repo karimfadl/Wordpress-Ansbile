@@ -1,0 +1,23 @@
+---
+- name: Install nginx
+  yum: name=nginx state=present
+
+- name: Copy nginx configuration for wordpress
+  template: src=default.conf dest=/etc/nginx/conf.d/default.conf
+  notify: restart nginx
+
+- name: nginx service state
+  service: name=nginx state=started enabled=yes
+
+- name: Add System group
+  group: name={{ sys_grp }}
+
+- name: Add System user
+  user: name={{sys_user }} group={{ sys_grp }}
+
+- name: Change System User Dir Mode
+  command: chmod 755 /home/{{ sys_user }}
+
+- name: Create pub_html Directory
+  file: path=/home/{{ sys_user}}/pub_html/ state=directory owner={{ sys_user }} group={{ sys_grp }} mode=0775
+

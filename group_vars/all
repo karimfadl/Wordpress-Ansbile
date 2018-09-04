@@ -1,0 +1,37 @@
+---
+# This is used for System Information
+sys_user: user
+sys_grp: group
+
+# This is used for the nginx + PHP server configuration.
+nginx_port: 80
+server_hostname: www.url.com
+root_dir: /home/{{ sys_user }}/pub_html/wordpress/
+web_host: 192.168.1.120
+
+# MySQL settings
+mysqlservice: mysqld
+mysql_port: 3306
+db_host: 192.168.1.110
+mysql_root_username: root
+mysql_root_password: 123
+
+# Wordpress Settings
+wp_version: latest
+wp_db_name: wordpress
+wp_db_user: user
+wp_db_password: 123
+
+# These are the New Relic settings
+License_Key: e662e75b197db281b18160a1bafb2974812d9de1
+app_name: PHP-RootGate-App
+
+# Disable All Updates
+# By default automatic updates are enabled, set this value to true to disable all automatic updates
+auto_up_disable: false
+
+#Define Core Update Level
+# true  = Development, minor, and major updates are all enabled
+# false = Development, minor, and major updates are all disabled
+# minor = Minor updates are enabled, development, and major updates are disabled
+core_update_level: true

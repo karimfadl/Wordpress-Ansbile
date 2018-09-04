@@ -1,0 +1,16 @@
+---
+- name: Download WordPress
+  get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/home/{{ sys_user }}/pub_html/wordpress-{{ wp_version }}.tar.gz
+
+- name: Extract archive
+  command: chdir=/home/{{ sys_user }}/pub_html/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz creates={{ root_dir }}
+
+- name: Copy WordPress config file
+  template: src=wp-config.php dest={{ root_dir }}
+
+- name: Change ownership of WordPress installation
+  file: path={{ root_dir }} owner={{ sys_user }} group={{sys_grp }} state=directory recurse=yes
+
+- name: Start php-fpm Service
+  service: name=php-fpm state=started enabled=yes
+
